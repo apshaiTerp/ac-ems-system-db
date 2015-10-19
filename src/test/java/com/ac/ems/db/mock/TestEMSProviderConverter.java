@@ -23,6 +23,7 @@ public class TestEMSProviderConverter extends TestCase {
     
     assertTrue("The providerIDs are not equal", origData.getProviderID() == finalData.getProviderID());
     assertTrue("The providerNames are not equal", origData.getProviderName().compareTo(finalData.getProviderName()) == 0);
+    assertTrue("The providerAddresses are not equal", origData.getProviderAddress().compareTo(finalData.getProviderAddress()) == 0);
     assertTrue("The providerLats are not equal", origData.getProviderLat() == finalData.getProviderLat());
     assertTrue("The providerLons are not equal", origData.getProviderLon() == finalData.getProviderLon());
     

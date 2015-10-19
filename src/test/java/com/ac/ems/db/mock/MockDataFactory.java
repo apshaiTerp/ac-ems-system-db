@@ -81,12 +81,24 @@ public class MockDataFactory {
     
     return testData;
   }
+  
+  public static DispatchEventLog createTestDispatchEventLog() {
+    DispatchEventLog testData = new DispatchEventLog();
+    
+    testData.setEventID(1832658176234857L);
+    testData.setCurState("NEBRASKA");
+    testData.setChangedOnDate(new Date(181276358716287L));
+    testData.setChangedByUserID(123587162398756L);
+    
+    return testData;
+  }
 
   public static EMSProvider createTestEMSProvider() {
     EMSProvider testData = new EMSProvider();
     
     testData.setProviderID(123094345234L);
     testData.setProviderName("JUnit EMS");
+    testData.setProviderAddress("Somewhere over the Rainbow");
     testData.setProviderLat(23.847589);
     testData.setProviderLon(-34.1234898);
     
@@ -136,6 +148,19 @@ public class MockDataFactory {
     testData.setBurnDivert("na");
     testData.setStemiDivert("na");
     testData.setStrokeDivert("na");
+    
+    return testData;
+  }
+
+  public static HospitalDiversionHistory createTestHospitalDiversionHistory() {
+    HospitalDiversionHistory testData = new HospitalDiversionHistory();
+    
+    testData.setDiversionID(876123791765L);
+    testData.setHospitalID(196817638726L);
+    testData.setCurState("NEBRASKA");
+    testData.setDivertCategory("STEMI");
+    testData.setChangedOnDate(new Date(777626736867L));
+    testData.setChangedByUserID(55125365471652L);
     
     return testData;
   }

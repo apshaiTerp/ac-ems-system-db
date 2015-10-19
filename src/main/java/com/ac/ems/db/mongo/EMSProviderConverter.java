@@ -36,6 +36,7 @@ public class EMSProviderConverter {
     BasicDBObject dbObject = new BasicDBObject("providerID", provider.getProviderID());
     if (provider.getProviderID() != -1)           dbObject.append("providerID", provider.getProviderID());
     if (provider.getProviderName() != null)       dbObject.append("providerName", provider.getProviderName());
+    if (provider.getProviderAddress() != null)    dbObject.append("providerAddress", provider.getProviderAddress());
     if (provider.getProviderLat() != 0.0)         dbObject.append("providerLat", provider.getProviderLat());
     if (provider.getProviderLon() != 0.0)         dbObject.append("providerLon", provider.getProviderLon());
     
@@ -52,6 +53,7 @@ public class EMSProviderConverter {
     EMSProvider provider = new EMSProvider();
     if (dbObject.containsField("providerID"))         provider.setProviderID((Long)dbObject.get("providerID"));
     if (dbObject.containsField("providerName"))       provider.setProviderName((String)dbObject.get("providerName"));
+    if (dbObject.containsField("providerAddress"))    provider.setProviderAddress((String)dbObject.get("providerAddress"));
     if (dbObject.containsField("providerLat"))        provider.setProviderLat((Double)dbObject.get("providerLat"));
     if (dbObject.containsField("providerLon"))        provider.setProviderLon((Double)dbObject.get("providerLon"));
 

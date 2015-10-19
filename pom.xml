@@ -44,6 +44,7 @@
     <source.plugin.version>2.2.1</source.plugin.version>
     <reports.plugin.version>2.7</reports.plugin.version>
     <surefire.plugin.version>2.18.1</surefire.plugin.version>
+    <assembly.plugin.version>2.5.3</assembly.plugin.version>
   </properties>
   
 
@@ -131,6 +132,30 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire.plugin.version}</version>
       </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>${assembly.plugin.version}</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.ac.ems.db.load.DataLoader</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      
     </plugins>
   </build>
 
