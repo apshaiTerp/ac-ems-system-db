@@ -29,6 +29,8 @@ public class TestDispatchEventHistoryConverter extends TestCase {
     assertTrue("The eventResolvedStates are not equal", origData.getEventResolvedState().compareTo(finalData.getEventResolvedState()) == 0);
     assertTrue("The eventStartDates are not equal", origData.getEventStartDate().compareTo(finalData.getEventStartDate()) == 0);
     assertTrue("The beginTransportDates are not equal", origData.getBeginTransportDate().compareTo(finalData.getBeginTransportDate()) == 0);
+    assertTrue("The actualAgeRanges are not equal", origData.getActualAgeRange().compareTo(finalData.getActualAgeRange()) == 0);
+    assertTrue("The observedSeverities are not equal", origData.getObservedSeverity() == finalData.getObservedSeverity());
     assertTrue("The eventEndDates are not equal", origData.getEventEndDate().compareTo(finalData.getEventEndDate()) == 0);
   }
 }

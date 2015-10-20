@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.ac.ems.data.*;
+import com.ac.ems.data.enums.SeverityLevel;
+import com.ac.ems.data.enums.UserRole;
 
 /**
  * A simple test class that allows me to create a couple of common objects for testing.
@@ -43,8 +45,11 @@ public class MockDataFactory {
     testData.setDispatchID(1004002L);
     testData.setPatientName("John Doe");
     testData.setPatientAddress("555 Nowhere Rd");
+    testData.setPatientGender("M");
+    testData.setPatientAgeRange("adult");
     testData.setPatientComplaint("It hurts");
     testData.setReportedByName("Hi, my name is");
+    testData.setReportedSeverity(SeverityLevel.NONCRITICAL);
     testData.setDispatchUserID(234516L);
     testData.setDispatchReceivedDate(new Date(2000000000));
     
@@ -62,6 +67,8 @@ public class MockDataFactory {
     testData.setEventState("STATE");
     testData.setEventStartDate(new Date(1368716289374L));
     testData.setBeginTransportDate(new Date(87698761283L));
+    testData.setActualAgeRange("teen");
+    testData.setObservedSeverity(SeverityLevel.PEDTRAUMA);
     
     return testData;
   }
@@ -77,6 +84,8 @@ public class MockDataFactory {
     testData.setEventResolvedState("STATE");
     testData.setEventStartDate(new Date(918273098179082375L));
     testData.setBeginTransportDate(new Date(1384765981736489756L));
+    testData.setActualAgeRange("child");
+    testData.setObservedSeverity(SeverityLevel.PEDNONCRITICAL);
     testData.setEventEndDate(new Date(716293876918762L));
     
     return testData;
@@ -87,6 +96,7 @@ public class MockDataFactory {
     
     testData.setEventID(1832658176234857L);
     testData.setCurState("NEBRASKA");
+    testData.setChangeDescription("This is where some stuff happened.");
     testData.setChangedOnDate(new Date(181276358716287L));
     testData.setChangedByUserID(123587162398756L);
     

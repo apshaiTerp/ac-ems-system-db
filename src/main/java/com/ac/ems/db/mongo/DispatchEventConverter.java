@@ -3,6 +3,7 @@ package com.ac.ems.db.mongo;
 import java.util.Date;
 
 import com.ac.ems.data.DispatchEvent;
+import com.ac.ems.data.enums.SeverityLevelConverter;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
@@ -39,6 +40,9 @@ public class DispatchEventConverter {
     if (event.getEventState() != null)          dbObject.append("eventState", event.getEventState());
     if (event.getEventStartDate() != null)      dbObject.append("eventStartDate", event.getEventStartDate());
     if (event.getBeginTransportDate() != null)  dbObject.append("beginTransportDate", event.getBeginTransportDate());
+    if (event.getActualAgeRange() != null)      dbObject.append("actualAgeRange", event.getActualAgeRange());
+    if (event.getObservedSeverity() != null)    dbObject.append("observedSeverity", SeverityLevelConverter.convertSeverityToString(event.getObservedSeverity()));
+
 
     return dbObject;
   }
@@ -55,6 +59,8 @@ public class DispatchEventConverter {
     if (dbObject.containsField("eventState"))            event.setEventState((String)dbObject.get("eventState"));
     if (dbObject.containsField("eventStartDate"))        event.setEventStartDate((Date)dbObject.get("eventStartDate"));
     if (dbObject.containsField("beginTransportDate"))    event.setBeginTransportDate((Date)dbObject.get("beginTransportDate"));
+    if (dbObject.containsField("actualAgeRange"))        event.setActualAgeRange((String)dbObject.get("actualAgeRange"));
+    if (dbObject.containsField("observedSeverity"))      event.setObservedSeverity(SeverityLevelConverter.convertStringToSeverity((String)dbObject.get("observedSeverity")));
 
     return event;
   }

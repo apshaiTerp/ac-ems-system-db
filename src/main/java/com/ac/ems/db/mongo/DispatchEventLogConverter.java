@@ -30,9 +30,10 @@ public class DispatchEventLogConverter {
     if (log == null) return null;
     
     BasicDBObject dbObject = new BasicDBObject("eventID", log.getEventID());
-    if (log.getCurState() != null)      dbObject.append("curState", log.getCurState());
-    if (log.getChangedOnDate() != null) dbObject.append("changedOnDate", log.getChangedOnDate());
-    if (log.getChangedByUserID() != -1) dbObject.append("changedByUserID", log.getChangedByUserID());
+    if (log.getCurState() != null)          dbObject.append("curState", log.getCurState());
+    if (log.getChangeDescription() != null) dbObject.append("changeDescription", log.getChangeDescription());
+    if (log.getChangedOnDate() != null)     dbObject.append("changedOnDate", log.getChangedOnDate());
+    if (log.getChangedByUserID() != -1)     dbObject.append("changedByUserID", log.getChangedByUserID());
 
     return dbObject;
   }
@@ -41,10 +42,11 @@ public class DispatchEventLogConverter {
     if (dbObject == null) return null;
     
     DispatchEventLog log = new DispatchEventLog();
-    if (dbObject.containsField("eventID"))         log.setEventID((Long)dbObject.get("eventID"));
-    if (dbObject.containsField("curState"))        log.setCurState((String)dbObject.get("curState"));
-    if (dbObject.containsField("changedOnDate"))   log.setChangedOnDate((Date)dbObject.get("changedOnDate"));
-    if (dbObject.containsField("changedByUserID")) log.setChangedByUserID((Long)dbObject.get("changedByUserID"));
+    if (dbObject.containsField("eventID"))           log.setEventID((Long)dbObject.get("eventID"));
+    if (dbObject.containsField("curState"))          log.setCurState((String)dbObject.get("curState"));
+    if (dbObject.containsField("changeDescription")) log.setChangeDescription((String)dbObject.get("changeDescription"));
+    if (dbObject.containsField("changedOnDate"))     log.setChangedOnDate((Date)dbObject.get("changedOnDate"));
+    if (dbObject.containsField("changedByUserID"))   log.setChangedByUserID((Long)dbObject.get("changedByUserID"));
 
     return log;
   }

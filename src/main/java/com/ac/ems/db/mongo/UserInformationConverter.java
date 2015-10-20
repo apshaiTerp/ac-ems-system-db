@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ac.ems.data.UserInformation;
-import com.ac.ems.data.util.UserRoleConverter;
+import com.ac.ems.data.enums.UserRoleConverter;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;

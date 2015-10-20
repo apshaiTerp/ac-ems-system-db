@@ -23,6 +23,7 @@ public class TestDispatchEventLogConverter extends TestCase {
     
     assertTrue("The eventIDs are not equal", origData.getEventID() == finalData.getEventID());
     assertTrue("The curStates are not equal", origData.getCurState().compareTo(finalData.getCurState()) == 0);
+    assertTrue("The changeDescriptions are not equal", origData.getChangeDescription().compareTo(finalData.getChangeDescription()) == 0);
     assertTrue("The changedOnDates are not equal", origData.getChangedOnDate().compareTo(finalData.getChangedOnDate()) == 0);
     assertTrue("The changedByUserIDs are not equal", origData.getChangedByUserID() == finalData.getChangedByUserID());
   }

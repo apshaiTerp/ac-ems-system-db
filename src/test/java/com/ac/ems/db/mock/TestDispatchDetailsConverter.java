@@ -24,8 +24,11 @@ public class TestDispatchDetailsConverter extends TestCase {
     assertTrue("The dispatchIDs are not equal", origData.getDispatchID() == finalData.getDispatchID());
     assertTrue("The patientNames are not equal", origData.getPatientName().compareTo(finalData.getPatientName()) == 0);
     assertTrue("The patientAddresses are not equal", origData.getPatientAddress().compareTo(finalData.getPatientAddress()) == 0);
+    assertTrue("The patientGenders are not equal", origData.getPatientGender().compareTo(finalData.getPatientGender()) == 0);
+    assertTrue("The patientAgeRanges are not equal", origData.getPatientAgeRange().compareTo(finalData.getPatientAgeRange()) == 0);
     assertTrue("The patientComplaints are not equal", origData.getPatientComplaint().compareTo(finalData.getPatientComplaint()) == 0);
     assertTrue("The reportedByNames are not equal", origData.getReportedByName().compareTo(finalData.getReportedByName()) == 0);
+    assertTrue("The reportedSeverities are not equal", origData.getReportedSeverity() == finalData.getReportedSeverity());
     assertTrue("The dispatchUserIDs are not equal", origData.getDispatchUserID() == finalData.getDispatchUserID());
     assertTrue("The dispatchReceivedDate are not equal", origData.getDispatchReceivedDate().compareTo(finalData.getDispatchReceivedDate()) == 0);
   }
