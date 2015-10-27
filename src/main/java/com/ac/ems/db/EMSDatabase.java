@@ -1,5 +1,7 @@
 package com.ac.ems.db;
 
+import java.util.List;
+
 import com.ac.ems.data.Ambulance;
 import com.ac.ems.data.AmbulanceTravelHistory;
 import com.ac.ems.data.DispatchDetails;
@@ -11,6 +13,7 @@ import com.ac.ems.data.Hospital;
 import com.ac.ems.data.HospitalDiversionHistory;
 import com.ac.ems.data.User;
 import com.ac.ems.data.UserInformation;
+import com.ac.ems.data.util.UserComplete;
 import com.ac.ems.db.exception.ConfigurationException;
 import com.ac.ems.db.exception.DatabaseOperationException;
 
@@ -53,7 +56,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link Ambulance} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link Ambulance} object to be written to the database.
+   * @param ambulance The {@link Ambulance} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -64,7 +67,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link AmbulanceTravelHistory} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link AmbulanceTravelHistory} object to be written to the database.
+   * @param history The {@link AmbulanceTravelHistory} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -75,7 +78,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link DispatchDetails} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link DispatchDetails} object to be written to the database.
+   * @param dispatch The {@link DispatchDetails} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -86,7 +89,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link DispatchEvent} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link DispatchEvent} object to be written to the database.
+   * @param event The {@link DispatchEvent} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -97,7 +100,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link DispatchEventHistory} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link DispatchEventHistory} object to be written to the database.
+   * @param history The {@link DispatchEventHistory} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -108,7 +111,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link DispatchEventLog} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link DispatchEventLog} object to be written to the database.
+   * @param log The {@link DispatchEventLog} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -119,7 +122,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link EMSProvider} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link EMSProvider} object to be written to the database.
+   * @param provider The {@link EMSProvider} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -130,7 +133,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link Hospital} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link Hospital} object to be written to the database.
+   * @param hospital The {@link Hospital} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -141,7 +144,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link HospitalDiversionHistory} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link HospitalDiversionHistory} object to be written to the database.
+   * @param diversion The {@link HospitalDiversionHistory} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -152,7 +155,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link User} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link User} object to be written to the database.
+   * @param user The {@link User} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -163,7 +166,7 @@ public interface EMSDatabase {
    * This method should insert the new {@link UserInformation} data into the database.  If the object already
    * exists, this method should throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link UserInformation} object to be written to the database.
+   * @param user The {@link UserInformation} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -174,7 +177,7 @@ public interface EMSDatabase {
    * This method should update the existing {@link Ambulance} data into the database.  If the object does
    * not exist (or no rows were updated), this method may throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link Ambulance} object to be written to the database.
+   * @param ambulance The {@link Ambulance} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -185,7 +188,7 @@ public interface EMSDatabase {
    * This method should update the existing {@link DispatchEvent} data into the database.  If the object does
    * not exist (or no rows were updated), this method may throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link DispatchEvent} object to be written to the database.
+   * @param event The {@link DispatchEvent} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -196,7 +199,7 @@ public interface EMSDatabase {
    * This method should update the existing {@link EMSProvider} data into the database.  If the object does
    * not exist (or no rows were updated), this method may throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link EMSProvider} object to be written to the database.
+   * @param provider The {@link EMSProvider} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -207,7 +210,7 @@ public interface EMSDatabase {
    * This method should update the existing {@link Hospital} data into the database.  If the object does
    * not exist (or no rows were updated), this method may throw a {@link DatabaseOperationException}.
    * 
-   * @param game The {@link Hospital} object to be written to the database.
+   * @param hospital The {@link Hospital} object to be written to the database.
    * @throws ConfigurationException Throws this exception if the database connection is not active.
    * @throws DatabaseOperationException Throws this exception if there are errors during the execution
    * of the requested operation.
@@ -256,4 +259,55 @@ public interface EMSDatabase {
    * of the requested operation.
    */
   public Object querySingleRow(String tableName, String idName, long idValue) throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method attempts to identify a user by their user name.
+   * 
+   * @param userName The user name we want to find.
+   * 
+   * @return The userID found, or 0 if none found.
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public long getUserIDByUserName(String userName) throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method gets the User data from the given userID.
+   * 
+   * @param userID The userID we want information for.
+   * 
+   * @return An {@link UserComplete} object with the user data, or null if not found
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public UserComplete getUserDataByID(long userID) throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will return all EMS Providers that have at least 1 available ambulance.
+   * 
+   * @return A List of {@link EMSProvider}s, or an empty list if none exist (impossible, but coded for)
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<EMSProvider> getProvidersWithAvailableAmbulances() throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will get all Hospitals that are capable of treating the provided condition.
+   * 
+   * @param condition The hospital criteria we need to be capable of treating
+   * @param excludeIDs The list of hospitals to exclude from the results
+   * 
+   * @return A List of {@link Hospital}s, or an empty list if none qualify (this is possible).
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<Hospital> getAvailableHospitalsByCondition(String condition, List<Long> excludeIDs) throws ConfigurationException, DatabaseOperationException;
 }

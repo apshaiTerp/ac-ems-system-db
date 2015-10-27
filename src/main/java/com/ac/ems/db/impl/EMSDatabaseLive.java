@@ -1,5 +1,8 @@
 package com.ac.ems.db.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.ac.ems.data.Ambulance;
 import com.ac.ems.data.AmbulanceTravelHistory;
 import com.ac.ems.data.DispatchDetails;
@@ -11,6 +14,7 @@ import com.ac.ems.data.Hospital;
 import com.ac.ems.data.HospitalDiversionHistory;
 import com.ac.ems.data.User;
 import com.ac.ems.data.UserInformation;
+import com.ac.ems.data.util.UserComplete;
 import com.ac.ems.db.EMSDatabase;
 import com.ac.ems.db.exception.ConfigurationException;
 import com.ac.ems.db.exception.DatabaseOperationException;
@@ -748,7 +752,11 @@ public class EMSDatabaseLive implements EMSDatabase {
       throw new DatabaseOperationException("Something bad happened executing the delete", t);
     }
   }
-
+  
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#hasExistingRow(java.lang.String, java.lang.String, long)
+   */
   public boolean hasExistingRow(String tableName, String idName, long idValue) throws ConfigurationException,
       DatabaseOperationException {
     //Check basic pre-conditions
@@ -780,6 +788,10 @@ public class EMSDatabaseLive implements EMSDatabase {
     }
   }
 
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#querySingleRow(java.lang.String, java.lang.String, long)
+   */
   public Object querySingleRow(String tableName, String idName, long idValue) throws ConfigurationException,
       DatabaseOperationException {
     //Check basic pre-conditions
@@ -788,7 +800,7 @@ public class EMSDatabaseLive implements EMSDatabase {
     if (idName == null)
       throw new DatabaseOperationException("The provided idName object was null.");
     if (idValue <= 0)
-      throw new DatabaseOperationException("The provided idValue object was null.");
+      throw new DatabaseOperationException("The provided idValue object was not valid.");
     
     if (mongoClient == null || mongoDB == null)
       throw new ConfigurationException("There is a problem with the database connection.");
@@ -830,6 +842,180 @@ public class EMSDatabaseLive implements EMSDatabase {
       }
       try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
       return result;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the query", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getUserIDByUserName(java.lang.String)
+   */
+  public long getUserIDByUserName(String userName) throws ConfigurationException, DatabaseOperationException {
+    //Check basic pre-conditions
+    if (userName == null)
+      throw new DatabaseOperationException("The provided userName object was null.");
+    if (userName.trim().length() == 0)
+      throw new DatabaseOperationException("The provided userName object was empty.");
+    
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      DBCollection collection   = mongoDB.getCollection(USER_TABLE_NAME);
+      BasicDBObject queryObject = new BasicDBObject("userName", userName);
+      
+      User foundUser  = null;
+      DBCursor cursor = collection.find(queryObject);
+      while (cursor.hasNext()) {
+        if (foundUser != null)
+          throw new DatabaseOperationException("I qualified multiple rows in the single row user lookup query");
+        
+        DBObject object = cursor.next();
+        foundUser = UserConverter.convertMongoToUser(object);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
+      if (foundUser == null) return 0;
+      return foundUser.getUserID();
+      
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the query", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getUserDataByID(long)
+   */
+  public UserComplete getUserDataByID(long userID) throws ConfigurationException, DatabaseOperationException {
+    //Check basic pre-conditions
+    if (userID <= 0)
+      throw new DatabaseOperationException("The provided userID object was null.");
+    
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      DBCollection userCollection = mongoDB.getCollection(USER_TABLE_NAME);
+      DBCollection infoCollection = mongoDB.getCollection(USER_INFORMATION_TABLE_NAME);
+      BasicDBObject queryObject   = new BasicDBObject("userID", userID);
+
+      //First, we get the basic User data
+      User foundUser = null;
+      DBCursor cursor = userCollection.find(queryObject);
+      while (cursor.hasNext()) {
+        if (foundUser != null)
+          throw new DatabaseOperationException("I qualified multiple rows in the single row user lookup query");
+        
+        DBObject object = cursor.next();
+        foundUser = UserConverter.convertMongoToUser(object);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      if (foundUser == null) return null;
+      
+      UserInformation foundInfo = null;
+      cursor = infoCollection.find(queryObject);
+      while (cursor.hasNext()) {
+        if (foundInfo != null)
+          throw new DatabaseOperationException("I qualified multiple rows in the single row user lookup query");
+        
+        DBObject object = cursor.next();
+        foundInfo = UserInformationConverter.convertMongoToUserInformation(object);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      if (foundInfo == null) return null;
+      
+      return new UserComplete(foundUser, foundInfo);
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the query", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getProvidersWithAvailableAmbulances()
+   */
+  public List<EMSProvider> getProvidersWithAvailableAmbulances() throws ConfigurationException, DatabaseOperationException {
+    //Check basic pre-conditions
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      DBCollection collection = mongoDB.getCollection(EMS_PROVIDER_TABLE_NAME);
+      
+      DBCursor cursor = collection.find();
+      List<EMSProvider> allProviders = new LinkedList<EMSProvider>();
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        EMSProvider provider = EMSProviderConverter.convertMongoToEMSProvider(object);
+        
+        if ((provider.getAvailAmbulances() != null) && (provider.getAvailAmbulances().size() > 0))
+          allProviders.add(provider);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+    
+      return allProviders;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the query", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getAvailableHospitalsByCondition(java.lang.String)
+   */
+  public List<Hospital> getAvailableHospitalsByCondition(String condition, List<Long> excludeIDs) throws ConfigurationException,
+      DatabaseOperationException {
+    //Check basic pre-conditions
+    if (condition == null)
+      throw new DatabaseOperationException("The provided condition object was null.");
+    
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      DBCollection collection = mongoDB.getCollection(HOSPITAL_TABLE_NAME);
+      
+      BasicDBObject queryObject  = new BasicDBObject("levelOfCare", condition);
+      if (condition.startsWith("trauma")) {
+        queryObject.append("traumaDivert", "open");
+        queryObject.append("traumaBedsFree", new BasicDBObject("$gt", 0));
+      } else if (condition.startsWith("basicER")) {
+        queryObject.append("erDivert", "open");
+        queryObject.append("erBedsFree", new BasicDBObject("$gt", 0));
+      } else if (condition.startsWith("burn")) {
+        queryObject.append("burnDivert", "open");
+        queryObject.append("traumaBedsFree", new BasicDBObject("$gt", 0));
+      } else if (condition.equalsIgnoreCase("stemi")) {
+        queryObject.append("stemiDivert", "open");
+        queryObject.append("erBedsFree", new BasicDBObject("$gt", 0));
+      } else if (condition.equalsIgnoreCase("stroke")) {
+        queryObject.append("strokeDivert", "open");
+        queryObject.append("erBedsFree", new BasicDBObject("$gt", 0));
+      }
+
+      List<Hospital> qualifyingHospitals = new LinkedList<Hospital>();
+      DBCursor cursor = collection.find(queryObject);
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        Hospital hospital = HospitalConverter.convertMongoToHospital(object);
+        
+        //Make sure the ID is not in our exclude list
+        if (!excludeIDs.contains(hospital.getHospitalID()))
+          qualifyingHospitals.add(hospital);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+    
+      return qualifyingHospitals;
     } catch (MongoException me) {
       throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
     } catch (Throwable t) {
