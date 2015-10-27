@@ -16,7 +16,8 @@ public class EMSProviderLoader {
   public static List<SuperEMSProvider> buildEMSProviderList() throws IOException {
     List<SuperEMSProvider> emsProviders = new LinkedList<SuperEMSProvider>();
     
-    BufferedReader reader = new BufferedReader(new FileReader("/Users/ac010168/Desktop/emsList2.txt"));
+    //BufferedReader reader = new BufferedReader(new FileReader("/Users/ac010168/Desktop/emsList2.txt"));
+    BufferedReader reader = new BufferedReader(new FileReader("/home/adam/umkc/ac-ems-system-db/src/data/emsList.txt"));
 
     //Skip the first line
     reader.readLine();
