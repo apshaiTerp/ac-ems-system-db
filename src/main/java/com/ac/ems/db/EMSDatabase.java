@@ -335,4 +335,18 @@ public interface EMSDatabase {
    * of the requested operation.
    */
   public List<String> getProviderNames() throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will fetch the max value of an ID column for a table.
+   * 
+   * @param tableName The table name, as defined by the constants in this interface.
+   * @param idName    The ID name, such as 'hospitalID', for the OK value we want to query for
+   * 
+   * @return A single ID value, or 1 if no rows exist for this schema.
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public long getGenericMaxID(String tableName, String idName) throws ConfigurationException, DatabaseOperationException;
 }

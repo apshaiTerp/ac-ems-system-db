@@ -1,5 +1,6 @@
 package com.ac.ems.db.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +31,7 @@ import com.ac.ems.db.mongo.HospitalConverter;
 import com.ac.ems.db.mongo.HospitalDiversionHistoryConverter;
 import com.ac.ems.db.mongo.UserConverter;
 import com.ac.ems.db.mongo.UserInformationConverter;
+import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -1083,6 +1085,45 @@ public class EMSDatabaseLive implements EMSDatabase {
       throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
     } catch (Throwable t) {
       throw new DatabaseOperationException("Something bad happened executing the query", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getGenericMaxID(java.lang.String, java.lang.String)
+   */
+  public long getGenericMaxID(String tableName, String idName) throws ConfigurationException, DatabaseOperationException {
+    //Check basic pre-conditions
+    if (tableName == null)
+      throw new DatabaseOperationException("The provided tableName object was null.");
+    if (idName == null)
+      throw new DatabaseOperationException("The provided idName object was null.");
+
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+    
+    long result = 0;
+    try {
+      DBCollection collection   = mongoDB.getCollection(tableName);
+
+      DBObject maxObject         = new BasicDBObject("$max", "$" + idName);
+      DBObject groupFieldsObject = new BasicDBObject("_id", "");
+      groupFieldsObject.put("maxValue", maxObject);
+      DBObject groupObject       = new BasicDBObject("$group", groupFieldsObject);
+      
+      List<DBObject> pipeline = new ArrayList<DBObject>(1);
+      pipeline.add(groupObject);
+      
+      AggregationOutput output = collection.aggregate(pipeline);
+      for (DBObject object : output.results()) {
+        if (object.containsField("maxValue")) result = (Long)object.get("maxValue");
+      }
+    
+      return result;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this select: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the select", t);
     }
   }
 }
