@@ -310,4 +310,28 @@ public interface EMSDatabase {
    * of the requested operation.
    */
   public List<Hospital> getAvailableHospitalsByCondition(String condition, List<Long> excludeIDs) throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will generate a list of Hospital names for selection.  The String will be in the format
+   * of "<id> - <Hospital Name>".
+   * 
+   * @return A List of Strings that will represent all Hospitals in the system.
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<String> getHospitalNames() throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will generate a list of Provider names for selection.  The String will be in the format
+   * of "<id> - <Provider Name>".
+   * 
+   * @return A List of Strings that will represent all Hospitals in the system.
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<String> getProviderNames() throws ConfigurationException, DatabaseOperationException;
 }

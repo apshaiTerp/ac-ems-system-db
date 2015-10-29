@@ -1,5 +1,6 @@
 package com.ac.ems.db.impl;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -1016,6 +1017,68 @@ public class EMSDatabaseLive implements EMSDatabase {
       try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
     
       return qualifyingHospitals;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the query", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getHospitalNames()
+   */
+  public List<String> getHospitalNames() throws ConfigurationException, DatabaseOperationException {
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      DBCollection collection   = mongoDB.getCollection(HOSPITAL_TABLE_NAME);
+      BasicDBObject queryObject = new BasicDBObject();
+      
+      List<String> resultList = new LinkedList<String>();
+      DBCursor cursor = collection.find(queryObject);
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        Hospital hospital = HospitalConverter.convertMongoToHospital(object);
+        String displayString = hospital.getHospitalID() + " - " + hospital.getHospitalName();
+        resultList.add(displayString);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
+      Collections.sort(resultList);
+      return resultList;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the query", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getProviderNames()
+   */
+  public List<String> getProviderNames() throws ConfigurationException, DatabaseOperationException {
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      DBCollection collection   = mongoDB.getCollection(EMS_PROVIDER_TABLE_NAME);
+      BasicDBObject queryObject = new BasicDBObject();
+      
+      List<String> resultList = new LinkedList<String>();
+      DBCursor cursor = collection.find(queryObject);
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        EMSProvider provider = EMSProviderConverter.convertMongoToEMSProvider(object);
+        String displayString = provider.getProviderID() + " - " + provider.getProviderName();
+        resultList.add(displayString);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
+      Collections.sort(resultList);
+      return resultList;
     } catch (MongoException me) {
       throw new DatabaseOperationException("Mongo raised an exception to this query: " + me.getMessage(), me);
     } catch (Throwable t) {
