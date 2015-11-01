@@ -42,6 +42,9 @@ public class DispatchDetailsConverter {
     if (dispatch.getReportedSeverity() != null)     dbObject.append("reportedSeverity", SeverityLevelConverter.convertSeverityToString(dispatch.getReportedSeverity()));
     if (dispatch.getDispatchUserID() != -1)         dbObject.append("dispatchUserID", dispatch.getDispatchUserID());
     if (dispatch.getDispatchReceivedDate() != null) dbObject.append("dispatchReceivedDate", dispatch.getDispatchReceivedDate());
+    if (dispatch.getProviderID() != -1)             dbObject.append("providerID", dispatch.getProviderID());
+    if (dispatch.getIncidentLat() != 0.0)           dbObject.append("incidentLat", dispatch.getIncidentLat());
+    if (dispatch.getIncidentLon() != 0.0)           dbObject.append("incidentLon", dispatch.getIncidentLon());
 
     return dbObject;
   }
@@ -60,6 +63,9 @@ public class DispatchDetailsConverter {
     if (dbObject.containsField("reportedSeverity"))     dispatch.setReportedSeverity(SeverityLevelConverter.convertStringToSeverity((String)dbObject.get("reportedSeverity")));
     if (dbObject.containsField("dispatchUserID"))       dispatch.setDispatchUserID((Long)dbObject.get("dispatchUserID"));
     if (dbObject.containsField("dispatchReceivedDate")) dispatch.setDispatchReceivedDate((Date)dbObject.get("dispatchReceivedDate"));
+    if (dbObject.containsField("providerID"))           dispatch.setProviderID((Long)dbObject.get("providerID"));
+    if (dbObject.containsField("incidentLat"))          dispatch.setIncidentLat((Double)dbObject.get("incidentLat"));
+    if (dbObject.containsField("incidentLon"))          dispatch.setIncidentLon((Double)dbObject.get("incidentLon"));
 
     return dispatch;
   }

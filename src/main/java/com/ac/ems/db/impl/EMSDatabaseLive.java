@@ -279,6 +279,39 @@ public class EMSDatabaseLive implements EMSDatabase {
 
   /*
    * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#insertDispatchDetailsHistoryData(com.ac.ems.data.DispatchDetails)
+   */
+  public void insertDispatchDetailsHistoryData(DispatchDetails dispatch) throws ConfigurationException, DatabaseOperationException {
+    //Check basic pre-conditions
+    if (dispatch == null)
+      throw new DatabaseOperationException("The provided dispatch object was null.");
+    
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+    
+    //Run the operation
+    try {
+      //Open the collection, i.e. table
+      DBCollection dispatchCollection = mongoDB.getCollection(DISPATCH_DETAILS_HISTORY_TABLE_NAME);
+      
+      BasicDBObject addObject = DispatchDetailsConverter.convertDispatchDetailsToMongo(dispatch);
+      WriteResult result = dispatchCollection.insert(addObject);
+      
+      if (debugMode) {
+        System.out.println ("The number of documents impacted by this operation: " + result.getN());
+        System.out.println ("Was this insert converted to an upsert?             " + result.isUpdateOfExisting());
+        System.out.println ("The new document _id value added:                   " + addObject.get("_id"));
+      }
+      
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this insert: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the insert", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
    * @see com.ac.ems.db.EMSDatabase#insertDispatchEventData(com.ac.ems.data.DispatchEvent)
    */
   public void insertDispatchEventData(DispatchEvent event) throws ConfigurationException, DatabaseOperationException {
@@ -1120,6 +1153,96 @@ public class EMSDatabaseLive implements EMSDatabase {
       }
     
       return result;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this select: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the select", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getDispatchIDsWithEvents()
+   */
+  public List<Long> getDispatchIDsWithEvents() throws ConfigurationException, DatabaseOperationException {
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      List<Long> resultList = new LinkedList<Long>();
+
+      DBCollection collection   = mongoDB.getCollection(DISPATCH_EVENT_TABLE_NAME);
+      DBCursor cursor = collection.find();
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        DispatchEvent event = DispatchEventConverter.convertMongoToDispatchEvent(object);
+        resultList.add(event.getDispatchID());
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
+      return resultList;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this select: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the select", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getDispatchDetails(boolean)
+   */
+  public List<DispatchDetails> getDispatchDetails(boolean excludeEvents) throws ConfigurationException,
+      DatabaseOperationException {
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      List<DispatchDetails> resultList = new LinkedList<DispatchDetails>();
+      List<Long> filterIDs = null;
+      if (excludeEvents) filterIDs = getDispatchIDsWithEvents();
+      else filterIDs = new ArrayList<Long>(0);
+      
+      DBCollection collection   = mongoDB.getCollection(DISPATCH_DETAILS_TABLE_NAME);
+      DBCursor cursor = collection.find();
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        DispatchDetails detail = DispatchDetailsConverter.convertMongoToDispatchDetails(object);
+        
+        if (!filterIDs.contains(detail.getDispatchID()))
+          resultList.add(detail);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
+      return resultList;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this select: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the select", t);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see com.ac.ems.db.EMSDatabase#getActiveEvents()
+   */
+  public List<DispatchEvent> getActiveEvents() throws ConfigurationException, DatabaseOperationException {
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      List<DispatchEvent> resultList = new LinkedList<DispatchEvent>();
+
+      DBCollection collection   = mongoDB.getCollection(DISPATCH_EVENT_TABLE_NAME);
+      DBCursor cursor = collection.find();
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        DispatchEvent event = DispatchEventConverter.convertMongoToDispatchEvent(object);
+        resultList.add(event);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
+      return resultList;
     } catch (MongoException me) {
       throw new DatabaseOperationException("Mongo raised an exception to this select: " + me.getMessage(), me);
     } catch (Throwable t) {

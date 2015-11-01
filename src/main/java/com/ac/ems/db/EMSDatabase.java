@@ -27,6 +27,7 @@ public interface EMSDatabase {
   public final static String AMBULANCE_TABLE_NAME                  = "ambulance";
   public final static String AMBULANCE_TRAVEL_HISTORY_TABLE_NAME   = "travelhistory";
   public final static String DISPATCH_DETAILS_TABLE_NAME           = "dispatchdetails";
+  public final static String DISPATCH_DETAILS_HISTORY_TABLE_NAME   = "dispatchhistory";
   public final static String DISPATCH_EVENT_TABLE_NAME             = "dispatchevent";
   public final static String DISPATCH_EVENT_HISTORY_TABLE_NAME     = "eventhistory";
   public final static String DISPATCH_EVENT_LOG_TABLE_NAME         = "eventlog";
@@ -85,6 +86,17 @@ public interface EMSDatabase {
    * of the requested operation.
    */
   public void insertDispatchDetailsData(DispatchDetails dispatch) throws ConfigurationException, DatabaseOperationException;
+
+  /**
+   * This method should archive the now complete {@link DispatchDetails} data into the database.  If the object already
+   * exists, this method should throw a {@link DatabaseOperationException}.
+   * 
+   * @param dispatch The {@link DispatchDetails} object to be written to the database.
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public void insertDispatchDetailsHistoryData(DispatchDetails dispatch) throws ConfigurationException, DatabaseOperationException;
 
   /**
    * This method should insert the new {@link DispatchEvent} data into the database.  If the object already
@@ -349,4 +361,40 @@ public interface EMSDatabase {
    * of the requested operation.
    */
   public long getGenericMaxID(String tableName, String idName) throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will fetch the list of all active eventIDs.
+   * 
+   * @return A List of IDs for all active events.  The List may be empty
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<Long> getDispatchIDsWithEvents() throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will get all active Dispatches.  Pass in true to filter out dispatches that are currently
+   * assigned.  
+   * 
+   * @param excludeEvents True if we want to filter out assigned dispatches, false if we want all active ones.
+   * 
+   * @return A List of {@link DispatchDetails}.  The List may be empty.
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<DispatchDetails> getDispatchDetails(boolean excludeEvents) throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will get all active Dispatch Events.
+   * 
+   * @return A List of {@link DispatchEvent}s.  The List may be empty.
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<DispatchEvent> getActiveEvents() throws ConfigurationException, DatabaseOperationException;
 }

@@ -52,6 +52,9 @@ public class MockDataFactory {
     testData.setReportedSeverity(SeverityLevel.NONCRITICAL);
     testData.setDispatchUserID(234516L);
     testData.setDispatchReceivedDate(new Date(2000000000));
+    testData.setProviderID(81826348768L);
+    testData.setIncidentLat(32.58758765);
+    testData.setIncidentLon(-92.876857647);
     
     return testData;
   }
