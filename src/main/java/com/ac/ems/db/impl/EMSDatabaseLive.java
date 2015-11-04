@@ -326,7 +326,7 @@ public class EMSDatabaseLive implements EMSDatabase {
     try {
       //Because we are using non-Mongo based primary keys, we need to specifically check first to see if the object
       //exists, and if it does, we need to do an update instead
-      if (hasExistingRow(DISPATCH_EVENT_TABLE_NAME, "eventID", event.getEventID())) {
+      if ((event.getEventID() > 0) && hasExistingRow(DISPATCH_EVENT_TABLE_NAME, "eventID", event.getEventID())) {
         if (debugMode)
           System.out.println ("Converting insert into update because of prior document");
         updateDispatchEventData(event);
