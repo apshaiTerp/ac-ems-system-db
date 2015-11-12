@@ -1180,6 +1180,16 @@ public class EMSDatabaseLive implements EMSDatabase {
       }
       try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
       
+      //Now be sure to filter out the archived events
+      collection = mongoDB.getCollection(DISPATCH_EVENT_HISTORY_TABLE_NAME);
+      cursor = collection.find();
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        DispatchEventHistory eventHistory = DispatchEventHistoryConverter.convertMongoToDispatchEventHistory(object);
+        resultList.add(eventHistory.getDispatchID());
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
       return resultList;
     } catch (MongoException me) {
       throw new DatabaseOperationException("Mongo raised an exception to this select: " + me.getMessage(), me);
