@@ -1259,4 +1259,30 @@ public class EMSDatabaseLive implements EMSDatabase {
       throw new DatabaseOperationException("Something bad happened executing the select", t);
     }
   }
+
+  public List<DispatchEvent> getEventsByTargetHospital(long hospitalID) throws ConfigurationException, DatabaseOperationException {
+    if (mongoClient == null || mongoDB == null)
+      throw new ConfigurationException("There is a problem with the database connection.");
+
+    try {
+      List<DispatchEvent> resultList = new LinkedList<DispatchEvent>();
+
+      DBCollection collection   = mongoDB.getCollection(DISPATCH_EVENT_TABLE_NAME);
+      BasicDBObject queryObject = new BasicDBObject("targetHospitalID", hospitalID);
+
+      DBCursor cursor = collection.find(queryObject);
+      while (cursor.hasNext()) {
+        DBObject object = cursor.next();
+        DispatchEvent event = DispatchEventConverter.convertMongoToDispatchEvent(object);
+        resultList.add(event);
+      }
+      try { cursor.close(); } catch (Throwable t) { /** Ignore Errors */ }
+      
+      return resultList;
+    } catch (MongoException me) {
+      throw new DatabaseOperationException("Mongo raised an exception to this select: " + me.getMessage(), me);
+    } catch (Throwable t) {
+      throw new DatabaseOperationException("Something bad happened executing the select", t);
+    }
+  }
 }

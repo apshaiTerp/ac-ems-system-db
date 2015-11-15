@@ -397,4 +397,17 @@ public interface EMSDatabase {
    * of the requested operation.
    */
   public List<DispatchEvent> getActiveEvents() throws ConfigurationException, DatabaseOperationException;
+  
+  /**
+   * This method will get all active Dispatch Events associated to this hospital.
+   * 
+   * @param hospitalID the hospital I want events for
+   * 
+   * @return A List of {@link DispatchEvent}s.  The List may be empty.
+   * 
+   * @throws ConfigurationException Throws this exception if the database connection is not active.
+   * @throws DatabaseOperationException Throws this exception if there are errors during the execution
+   * of the requested operation.
+   */
+  public List<DispatchEvent> getEventsByTargetHospital(long hospitalID) throws ConfigurationException, DatabaseOperationException;
 }
