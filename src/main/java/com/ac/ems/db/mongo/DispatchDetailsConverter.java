@@ -39,6 +39,7 @@ public class DispatchDetailsConverter {
     if (dispatch.getPatientAgeRange() != null)      dbObject.append("patientAgeRange", dispatch.getPatientAgeRange());
     if (dispatch.getPatientComplaint() != null)     dbObject.append("patientComplaint", dispatch.getPatientComplaint());
     if (dispatch.getReportedByName() != null)       dbObject.append("reportedByName", dispatch.getReportedByName());
+    if (dispatch.getContactPhone() != null)         dbObject.append("contactPhone", dispatch.getContactPhone());
     if (dispatch.getReportedSeverity() != null)     dbObject.append("reportedSeverity", SeverityLevelConverter.convertSeverityToString(dispatch.getReportedSeverity()));
     if (dispatch.getDispatchUserID() != -1)         dbObject.append("dispatchUserID", dispatch.getDispatchUserID());
     if (dispatch.getDispatchReceivedDate() != null) dbObject.append("dispatchReceivedDate", dispatch.getDispatchReceivedDate());
@@ -59,6 +60,7 @@ public class DispatchDetailsConverter {
     if (dbObject.containsField("patientGender"))        dispatch.setPatientGender((String)dbObject.get("patientGender"));
     if (dbObject.containsField("patientAgeRange"))      dispatch.setPatientAgeRange((String)dbObject.get("patientAgeRange"));
     if (dbObject.containsField("patientComplaint"))     dispatch.setPatientComplaint((String)dbObject.get("patientComplaint"));
+    if (dbObject.containsField("contactPhone"))         dispatch.setContactPhone((String)dbObject.get("contactPhone"));
     if (dbObject.containsField("reportedByName"))       dispatch.setReportedByName((String)dbObject.get("reportedByName"));
     if (dbObject.containsField("reportedSeverity"))     dispatch.setReportedSeverity(SeverityLevelConverter.convertStringToSeverity((String)dbObject.get("reportedSeverity")));
     if (dbObject.containsField("dispatchUserID"))       dispatch.setDispatchUserID((Long)dbObject.get("dispatchUserID"));
