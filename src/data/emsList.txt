@@ -1,0 +1,95 @@
+EMSProvider Name	providerID	Address	Lat	Lon	Ambulances
+American Medical Response	1230001	3121 S Dodgion Ave, Independence, MO 64055	39.0632871	-94.4140756	5
+American Medical Response	1230002	1902 Foxridge Drive, Kansas City, Kansas 66106	39.0453452	-94.6522464	5
+Belton Emergency Services	1230003	16300 N Mullen Rd, Belton, MO 64012	38.8273602	-94.5154821	2
+Bonner Springs Fire Department	1230004	13001 Metropolitan Ave, Bonner Springs, KS 66012	39.0647275	-94.9090863	2
+Central Cass County Fire Protection District	1230005	2507 SE Outer Rd, Harrisonville, MO 64701	38.6362622	-94.3520767	1
+Central Jackson County Fire Protection District	1230006	4715 E US Hwy 40, Blue Springs, MO 64015	39.0144275	-94.321584	1
+Childrens Mercy Critical Care Transport	1230007	2401 Gillham Rd, Kansas City, MO 64108	39.0774967	-94.6007173	5
+Claycomo Fire Department	1230008	333 US-69, Kansas City, MO 64119	39.161507	-94.6581095	1
+Excelsior Springs Fire Department	1230009	1120 Tracy Ave, Excelsior Springs, MO 64024	39.3545021	-94.2405437	1
+Fort Osage Fire District 	1230010	400 E Monroe St, Buckner, MO 64016	39.1381683	-94.1930767	1
+Franklin County Ambulance 	1230011	219 E 14th St, Ottawa, KS 66067	38.5960654	-95.2685004	1
+Garden City Fire Department	1230012	302 N 9th St, Garden City, KS 67846	37.9668731	-100.8784402	1
+Gladstone Public Safety Department	1230013	6569 N Prospect Ave, Kansas City, MO 64119	39.2236021	-94.5691148	1
+Grandview Fire Department	1230014	7005 High Grove Rd, Grandview, MO 64030	38.8858189	-94.5130424	1
+Harrisonville Fire Department	1230015	903 S Commercial St, Harrisonville, MO 64701	38.6328854	-94.3672506	1
+Higginsville EMS	1230016	533 MO-13 Buisness, Lexington Township, MO 64067	39.0951189	-93.7365117	1
+Holt Fire Protection District	1230017	260 MO-33, Holt, MO 64048	39.1341425	-94.669068	1
+City of Independence Fire Department	1230018	950 N Spring St, Independence, MO 64050	39.1011799	-94.422224	2
+City of Independence Fire Department	1230019	100 N Pearl St, Independence, MO 64050	39.0926649	-94.412071	2
+Sugar Creek Fire Department	1230020	1001 Heroes Way, Independence, MO 64055	39.119034	-94.447573	1
+John Knox Village EMS	1230021	400 NW Murray Rd, Lee's Summit, MO 64081	38.921846	-94.405499	1
+Johnson County, Kan., Fire District #2 (Rural)	1230022	19495 Metcalf Ave, Stilwell, KS 66085	38.774672	-94.669309	1
+Johnson County Med-Act	1230023	11811 S Sunset Dr #1100, Olathe, KS 66061	38.9148447	-94.8013679	2
+KCK Fire Department Station No. 3	1230024	420 Kansas Ave, Kansas City, KS 66105	39.087959	-94.6222116	1
+KCK Fire Department Station No. 9	1230025	815 N 6th St, Kansas City, KS 66101	39.1142094	-94.625867	1
+KCK Fire Department Station No. 10	1230026	2210 W 36 Ave, Kansas City, KS 66103	39.0611804	-94.6133187	1
+KCK Fire Department Station No. 17	1230027	2418 S 51st St, Kansas City, KS 66106	39.0574901	-94.6977494	1
+Kearney Fire and Rescue	1230028	201 E 6th St, Kearney, MO 64060	39.367613	-94.361695	1
+Lake City Fire Department	1230029	Lake City, KS 67071	38.606795	-100.0785931	1
+Lawrence-Douglas County Fire and Medical	1230030	746 Kentucky St, Lawrence, KS 66044	38.9697131	-95.2398759	1
+Lawson Fire and Rescue	1230031	402 E 6th St, Lawson, MO 64062	39.4402156	-94.203482	1
+Leavenworth EMS	1230032	500 Eisenhower Rd # 100, Leavenworth, KS 66048	39.267551	-94.91213	1
+Lee’s Summit Fire Department	1230033	207 SE Douglas St, Lee's Summit, MO 64063	38.9136548	-94.3789313	1
+Lee's Summit Fire Station 2	1230034	2000 NE Rice Rd, Lee's Summit, MO 64064	38.949143	-94.362278	1
+Lee's Summit Fire Station 3	1230035	210 SW Pryor Rd, Lee's Summit, MO 64081	38.912645	-94.415935	1
+Lee's Summit Fire Station 4	1230036	404 NE Woods Chapel Rd, Lee's Summit, MO 64064	38.9834516	-94.3725901	1
+Lee's Summit Fire Station 5	1230037	3650 SW Windemere Dr, Lee's Summit, MO 64082	38.853778	-94.389972	1
+Lee's Summit Fire Station 6	1230038	101 NE Blackwell Rd, Lee's Summit, MO 64086	38.9248975	-94.3206321	1
+Lee's Summit Fire Station 7	1230039	2150 SW Scherer Rd, Lee's Summit, MO 64082	38.8903502	-94.4218624	1
+Lexington Fire Department	1230040	533 State Rte 13, Lexington, MO 64067	39.1762336	-93.8781976	1
+Lone Jack Fire Protection District	1230041	107 W Main St, Lone Jack, MO 64070	38.8710313	-94.1767105	2
+Lotawana Fire Protection District	1230042	101 Lotawana Drive, Lake Lotawana, MO  64086	38.9388405	-94.2594288	2
+Miami County EMS Station 141	1230043	32765 Clover Rd, Paola, KS 66071	38.5334901	-94.8959952	2
+Miami County EMS Station 142	1230044	205 S Metcalf Rd, Louisburg, KS, 66053	38.6193211	-94.6783129	1
+North Kansas City Fire Department	1230045	1833 Bedford Ave, North Kansas City, MO 64116	39.138926	-94.5591227	2
+North Kansas City Fire Department	1230046	1815 Howell St, Kansas City, MO 64116	39.1407184	-94.5745551	2
+Northland Regional Ambulance District	1230047	1000 Platte Falls Rd, Platte City, MO 64079	39.3535016	-94.7705879	3
+Pleasant Hill Ambulance District	1230048	305 Pine St, Pleasant Hill, MO 64080	38.7846812	-94.2750445	2
+Pleasant Valley Fire Department	1230049	6801 Sobbie Rd, Pleasant Valley, MO 64068	39.021738	-94.7261487	2
+Prairie Township Fire Protection District	1230050	11010 Milton Thompson Rd, Lee's Summit, MO 64086	38.9164462	-94.2998573	1
+Smithville Fire Protection District	1230051	341 Park Dr, Smithville, MO 64089	39.3639286	-94.5870424	2
+Sni Valley Fire Protection District	1230052	1600 S. Broadway St., Oak Grove, MO 64075	38.9998939	-94.1324021	1
+South Metro Fire District.	1230053	611 W Foxwood Dr, Raymore, MO 64083	38.8113079	-94.4652423	1
+Wellington-Napoleon Fire Protection District	1230054	300 Cherry St, Wellington, MO 64097	39.1351329	-93.9842866	1
+West Peculiar Fire Protection District	1230055	200 S Main St, Peculiar, MO 64078	38.7170133	-94.4636447	1
+West Platte Fire Protection District	1230056	17870 MO-45, Weston, MO 64098	39.4145263	-94.8903053	1
+KCFD Station 4 (Line Creek)	1230057	4000 NW 64th, Kansas City, MO 64151	39.210535	-94.629155	1
+KCFD Station 6 (Avondale)	1230058	2600 NE Parvin Road, Kansas City, MO 64117	39.1633803	-94.5502761	1
+KCFD Station 7 (Westside)	1230059	616 West Pennway, Kansas City, MO 64108	39.088006	-94.594388	1
+KCFD Station 14 (Shoal Creek)	1230060	8300 N. Brighton, Kansas City, MO 64119	39.244069	-94.523361	1
+KCFD Station 16 (Overhaul Base)	1230061	9205 NW 112th, Kansas City, MO 64153	39.2955272	-94.6883672	1
+KCFD Station 18 (Ingleside)	1230062	3211 Indiana, Kansas City, MO 64128	39.068447	-94.545824	2
+KCFD Station 19 (Westport)	1230063	550 W. 43rd Street, Kansas City, MO 64111	39.049726	-94.5950785	1
+KCFD Station 28 (Red Bridge)	1230064	930 Red Bridge Road, Kansas City, MO 64131	38.9260639	-94.582167	1
+KCFD Station 29 (Brookside)	1230065	1414 E. 63rd, Kansas City, MO 64110	39.0131087	-94.5713323	1
+KCFD Station 30 (Marlboroough)	1230066	7534 Prospect, Kansas City, MO 64132	38.989523	-94.560015	1
+KCFD Station 33 (East Swope Highlands)	1230067	7504 E. 67th, Kansas City, MO 64133	39.002977	-94.501347	1
+KCFD Station 34 (Winnwood)	1230068	4836 N. Brighton, Kansas City, MO 64119	39.1823657	-94.5235812	1
+KCFD Station 35 (Swope Parkway-Elmwood)	1230069	3200 Emanuel Cleaver II Blvd., Kansas City, MO 64130	39.0412889	-94.5494143	1
+KCFD Station 36 (Indian Creek)	1230070	9903 Holmes, Kansas City, MO 64131	38.947557	-94.583562	1
+KCFD Station 37 (Waldo)	1230071	7708 Wornall Road, Kansas City, MO 64114	38.988345	-94.5969089	1
+KCFD Station 39 (Royal Meadows)	1230072	11100 E. 47th Street, Kansas City, MO 64133	39.0368941	-94.4503698	1
+KCFD Station 40 (Englewood)	1230073	5200 N. Oak Trafficway, Kansas City, MO 64118	39.188269	-94.579273	1
+KCFD Station 42 (Ruskin Heights)	1230074	6006 E. Red Bridge Road, Kansas City, MO 64134	38.9245583	-94.523013	1
+KCK Fire Department Station 15	1230075	444 Kindelberger Rd, Kansas City, KS 66115	39.150785	-94.618227	1
+KCK Fire Department Station 7	1230076	1400 Joseph J Segura Ln, Kansas City, KS 66106	39.074954	-94.661124	1
+Lenexa Fire Station 1	1230077	9620 Pflumm Rd, Lenexa KS, 66215	38.9543183	-94.7453557	2
+Lenexa Fire Station 2	1230078	8725 Lackman Road, Lenexa, KS, 66215	38.9700396	-94.7617669	1
+Lenexa Fire Station 5	1230079	19151 Prairie Star Pkwy, Lenexa, KS 66220	38.954825	-94.809975	1
+Liberty Fire Department Headquarters - Station 1	1230080	200 West Mississippi St, Liberty, MO 64068	39.248454	-94.4246805	2
+Liberty Fire Station 2	1230081	1040 Kent St, Liberty, MO 64068	39.23485	-94.437183	1
+Olathe Fire Station 51	1230082	501 E. Old 56 Hwy, Olathe, KS, 66061	38.8667297	-94.8167052	2
+Olathe Fire Station 52	1230083	1725 Renner Blvd, Olathe, KS 66061	38.909851	-94.7826377	1
+Olathe Fire Station 53	1230084	14940 W 143rd St, Olathe, KS 66062	38.8694807	-94.7611854	1
+Olathe Fire Station 54	1230085	13301 S Mur-Len Rd, Olathe, KS 66062	38.8862633	-94.7812617	1
+Olathe Fire Station 55	1230086	1128 W Spruce St, Olathe, KS 66061	38.8877325	-94.8356778	1
+Olathe Fire Station 56	1230087	24200 College Blvd, Olathe, KS 66061	38.927951	-94.8687127	1
+Olathe Fire Station 57	1230088	16110 S Mur-Len Rd, Olathe, KS 66062	38.87179	-94.779568	2
+Overland Park Fire Department Station 41	1230089	7550 W 95th St, Overland Park, KS 66204	38.9567535	-94.6748879	1
+Overland Park Fire Department Station 42	1230090	9500 W 95th St, Overland Park, KS 66212	38.956983	-94.6974437	1
+Overland Park Fire Department Station 43	1230091	13801 Switzer Rd, Overland Park, KS 66221	38.8782319	-94.7012806	1
+Overland Park Fire Department Station 44	1230092	8051 W 119th St, Overland Park, KS 66213	38.9126297	-94.6825043	1
+Overland Park Fire Department Station 45	1230093	15935 Metcalf Ave, Stillwell, KS 66085	38.838985	-94.6693907	1
+Raytown Fire Protection District Station 51	1230094	6020 Raytown Trafficway, Raytown, MO 64133	39.013373	-94.469602	1
